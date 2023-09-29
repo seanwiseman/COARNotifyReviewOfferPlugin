@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugin_settings SYSTEM "../../../lib/pkp/dtd/pluginSettings.dtd">
+
+<plugin_settings>
+    <setting type="bool">
+        <name>enabled</name>
+        <value>true</value>
+    </setting>
+    <setting type="object">
+        <name>reviewServiceList</name>
+        <value>
+            <array />
+        </value>
+    </setting>
+    <setting type="string">
+        <name>originHomeUrl</name>
+        <value></value>
+    </setting>
+    <setting type="string">
+        <name>originInboxUrl</name>
+        <value></value>
+    </setting>
+</plugin_settings>

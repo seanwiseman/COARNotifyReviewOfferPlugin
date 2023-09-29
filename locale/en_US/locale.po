@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-07-29T11:05:18+00:00\n"
+"PO-Revision-Date: 2020-07-29T11:05:18+00:00\n"
+"Language: U.S. English\n"
+
+
+msgid "plugins.generic.coarNotifyReviewOffer.displayName"
+msgstr "Review Offers"
+
+msgid "plugins.generic.coarNotifyReviewOffer.description"
+msgstr "This plugin adds a tab in the submission view, from here users can request reviews from target preprint review services."
+
+msgid "plugins.generic.coarNotifyReviewOffer.pages"
+msgstr "Page(s)"
+
+msgid "plugins.generic.coarNotifyReviewOffer.noORCID"
+msgstr "No ORCID given"
+
+msgid "plugins.generic.coarNotifyReviewOffer.noPublications"
+msgstr "No submissions were found with this ORCID or e-mail"
+
+msgid "plugins.generic.coarNotifyReviewOffer.orcid"
+msgstr "ORCID"
+
+msgid "plugins.generic.coarNotifyReviewOffer.homeUrl"
+msgstr "Home URL"
+
+msgid "plugins.generic.coarNotifyReviewOffer.inboxUrl"
+msgstr "Inbox URL"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originHomeUrl"
+msgstr "Origin Home URL"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originInboxUrl"
+msgstr "Origin Inbox URL"
