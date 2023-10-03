@@ -1,25 +1,10 @@
-{**
- * plugins/generic/registrationNotification/templates/settingsForm.tpl
- *
- * Copyright (c) 2014-2019 Simon Fraser University
- * Copyright (c) 2003-2019 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * Registration Notification plugin settings
- *
- *}
-{load_script context="CoarNotifyReviewOfferSettingsForm"}
-<script>
+<script type="text/javascript">
     $(function() {ldelim}
-        // Attach the form handler.
-        $('#coarNotifyReviewOfferSettingsForm').pkpHandler(
-            '$.pkp.controllers.form.registrationNotification.RegistrationNotificationFormHandler',
-            {ldelim}removeCaption: {translate|json_encode key="common.remove"}{rdelim}
-        );
+        $('#CoarNotifyReviewOfferSettingsForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
         {rdelim});
 </script>
 
-<form class="pkp_form" id="coarNotifyReviewOfferSettingsForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT op="manage" category="generic" plugin=$pluginName verb="settings" save=true}">
+<form class="pkp_form" id="CoarNotifyReviewOfferSettingsForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT op="manage" category="generic" plugin=$pluginName verb="settings" tab="basic" save=true}">
     <div id="coarNotifyReviewOfferSettings">
         <div id="description">{translate key="plugins.generic.coarNotifyReviewOffer.description"}</div>
 
@@ -38,8 +23,8 @@
         {fbvElement type="text" label="plugins.generic.coarNotifyReviewOffer.originInboxUrl" id="origin-inbox-url" name="originInboxUrl" value=$originInboxUrl inline=true size=$fbvStyles.size.MEDIUM}
         {/fbvFormSection}
 
-        <h4>Review Service Settings</h4>
-        <p>These settings provide your users with a list of target review services.</p>
+            <h4>Review Service Settings</h4>
+            <p>These settings provide your users with a list of target review services.</p>
         {foreach from=$inboxUrl key=index item=value}
             {fbvFormSection}
             {fbvElement type="text" label="plugins.generic.coarNotifyReviewOffer.homeUrl" id="home-url-`$index`" name="homeUrl[]" value=$homeUrl[$index] inline=true size=$fbvStyles.size.MEDIUM}

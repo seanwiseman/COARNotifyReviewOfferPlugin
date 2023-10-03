@@ -36,7 +36,7 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
         $this->setData('homeUrl', is_array($reviewServiceList) ? array_keys($reviewServiceList) : []);
         $this->setData('inboxUrl', is_array($reviewServiceList) ? array_values($reviewServiceList) : []);
 
-        return parent::initData();
+        parent::initData();
     }
 
     /**
@@ -64,7 +64,7 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
         $originInboxUrl = $this->getData('originInboxUrl');
         $this->setData('originInboxUrl', $originInboxUrl);
 
-        return parent::readInputData();
+        parent::readInputData();
     }
 
     /**
@@ -81,7 +81,7 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
                 'contexts' => 'CoarNotifyReviewOfferSettingsForm'
             ]
         );
-        return parent::fetch($request);
+        return parent::fetch($request, $template, $display);
     }
 
     public function execute(...$functionArgs) {
@@ -89,6 +89,6 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
 
         $this->_plugin->updateSetting($this->_contextId, 'originHomeUrl', $this->getData('originHomeUrl'), 'string');
         $this->_plugin->updateSetting($this->_contextId, 'originInboxUrl', $this->getData('originInboxUrl'), 'string');
-        return parent::execute();
+        return parent::execute(...$functionArgs);
     }
 }
