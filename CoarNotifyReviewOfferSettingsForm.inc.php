@@ -27,6 +27,8 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
      * @copydoc Form::initData()
      */
     public function initData() {
+        $originName = $this->_plugin->getSetting($this->_contextId, 'originName');
+        $this->setData('originName', $originName);
         $originHomeUrl = $this->_plugin->getSetting($this->_contextId, 'originHomeUrl');
         $this->setData('originHomeUrl', $originHomeUrl);
         $originInboxUrl = $this->_plugin->getSetting($this->_contextId, 'originInboxUrl');
@@ -55,6 +57,10 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
         }
         $this->setData('homeUrl', array_values($homeUrls));
         $this->setData('inboxUrl', array_values($inboxUrls));
+
+        $this->readUserVars(['originName']);
+        $originName = $this->getData('originName');
+        $this->setData('originName', $originName);
 
         $this->readUserVars(['originHomeUrl']);
         $originHomeUrl = $this->getData('originHomeUrl');
@@ -87,6 +93,7 @@ class CoarNotifyReviewOfferSettingsForm extends Form {
     public function execute(...$functionArgs) {
         $this->_plugin->updateSetting($this->_contextId, 'reviewServiceList', array_combine($this->getData('homeUrl'), $this->getData('inboxUrl')), 'object');
 
+        $this->_plugin->updateSetting($this->_contextId, 'originName', $this->getData('originName'), 'string');
         $this->_plugin->updateSetting($this->_contextId, 'originHomeUrl', $this->getData('originHomeUrl'), 'string');
         $this->_plugin->updateSetting($this->_contextId, 'originInboxUrl', $this->getData('originInboxUrl'), 'string');
         return parent::execute(...$functionArgs);

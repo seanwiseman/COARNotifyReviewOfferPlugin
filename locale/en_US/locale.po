@@ -21,6 +21,18 @@ msgstr "This plugin adds a tab in the submission view, from here users can reque
 msgid "plugins.generic.coarNotifyReviewOffer.pages"
 msgstr "Page(s)"
 
+msgid "plugins.generic.coarNotifyReviewOffer.addService"
+msgstr "Add Review Service"
+
+msgid "plugins.generic.coarNotifyReviewOffer.manageReviewServices"
+msgstr "Manage Review Service Preferences"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewService"
+msgstr "Review Service"
+
+msgid "plugins.generic.coarNotifyReviewOffer.noServices"
+msgstr "No Services"
+
 msgid "plugins.generic.coarNotifyReviewOffer.noORCID"
 msgstr "No ORCID given"
 
@@ -35,6 +47,9 @@ msgstr "Home URL"
 
 msgid "plugins.generic.coarNotifyReviewOffer.inboxUrl"
 msgstr "Inbox URL"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originName"
+msgstr "Origin Name"
 
 msgid "plugins.generic.coarNotifyReviewOffer.originHomeUrl"
 msgstr "Origin Home URL"

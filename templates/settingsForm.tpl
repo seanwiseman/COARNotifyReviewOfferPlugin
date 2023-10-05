@@ -16,6 +16,10 @@
         {fbvFormArea id="coarNotifyReviewOfferSettingsFormArea"}
 
         {fbvFormSection}
+        {fbvElement type="text" label="plugins.generic.coarNotifyReviewOffer.originName" id="origin-home-url" name="originName" value=$originName inline=true size=$fbvStyles.size.MEDIUM}
+        {/fbvFormSection}
+
+        {fbvFormSection}
         {fbvElement type="text" label="plugins.generic.coarNotifyReviewOffer.originHomeUrl" id="origin-home-url" name="originHomeUrl" value=$originHomeUrl inline=true size=$fbvStyles.size.MEDIUM}
         {/fbvFormSection}
 

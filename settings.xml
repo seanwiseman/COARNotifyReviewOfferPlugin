@@ -13,6 +13,10 @@
         </value>
     </setting>
     <setting type="string">
+        <name>originName</name>
+        <value></value>
+    </setting>
+    <setting type="string">
         <name>originHomeUrl</name>
         <value></value>
     </setting>
