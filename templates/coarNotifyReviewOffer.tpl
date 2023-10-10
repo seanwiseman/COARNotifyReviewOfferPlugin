@@ -1,25 +1,25 @@
+{**
+ * plugins/generic/coarNotifyReviewOffer/templates/coarNotifyReviewOffer.tpl
+ *
+ * Copyright (c) 2020-2021 Lepidus Tecnologia
+ * Copyright (c) 2020-2021 SciELO
+ * Distributed under the GNU GPL v3. For full terms see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * @brief Template for display the list of submissions of an author
+ *}
+
 <link rel="stylesheet" type="text/css" href="/plugins/generic/coarNotifyReviewOffer/styles/coarNotifyReviewOffer.css">
-<script type="text/javascript" src="/plugins/generic/coarNotifyReviewOffer/templates/pagination.js"></script>
 <script type="text/javascript" src="/plugins/generic/coarNotifyReviewOffer/js/coar-notify.js"></script>
+
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#openModalButton').click(function() {
-            $.ajax({
-                url: '{url op="fetchModalContent"}',
-                type: 'GET',
-                success: function(data) {
-                    // Create and open the modal
-                    new pkp.controllers.modal.AjaxModal(data.content);
-                }
-            });
-        });
-    });
+    $(function() {ldelim}
+        $('#reviewOfferPreferences').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
+        {rdelim});
 </script>
 
 
 {load_header context="backend"}
 
-{$currentAuthor = 0}
 <div id="coarNotifyReviewOffer">
     <div id="historyHeader">
         <h2>{translate key="plugins.generic.coarNotifyReviewOffer.displayName"}</h2>
@@ -71,36 +71,11 @@
                 published. You can update this choice at any point before publication.
             </p>
 
-            <h3>Services</h3>
-            <form action="" method="post">
-                <label>
-                    <input type="checkbox" name="option[]" value="1"> Option 1
-                </label><br>
-                <label>
-                    <input type="checkbox" name="option[]" value="2"> Option 2
-                </label><br>
-                <label>
-                    <input type="checkbox" name="option[]" value="3"> Option 3
-                </label><br>
-                <button type="submit">Save</button>
-            </form>
-
-            {*            <button id="openModalButton">Open Modal</button>*}
+            <div id="reviewOfferPreferences">
+                {capture assign=reviewOfferPrefsGridUrl}{url router=$smarty.const.ROUTE_COMPONENT component="plugins.generic.coarNotifyReviewOffer.controllers.grid.CoarReviewOfferGridHandler" op="fetchGrid" submissionId=$submissionId escape=false}{/capture}
+                {load_url_in_div id="reviewOfferPrefsGridContainer"|uniqid url=$reviewOfferPrefsGridUrl}
+            </div>
         {/if}
     {/if}
-
-
-
-    {*    <br/>*}
-    {*    <hr/>*}
-    {*    <div>*}
-    {*        <h4>Debug</h4>*}
-    {*        <p>Full name: {$actorName}</p>*}
-    {*        <p>Author ID: {$authorId}</p>*}
-    {*        <p>DOI: {$doi}</p>*}
-    {*        <p>Is Published: {$isPublished}</p>*}
-    {*    </div>*}
-
-    {*    <div>{$submission}</div>*}
 
 </div>
