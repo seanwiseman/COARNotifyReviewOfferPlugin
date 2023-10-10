@@ -18,74 +18,75 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
     /** @var array Lazy loaded review service list */
     private $_reviewServiceList = null;
 
-	public function register($category, $path, $mainContextId = null) {
+    public function register($category, $path, $mainContextId = null) {
         $success = parent::register($category, $path, $mainContextId);
 
         if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) {
             return true;
         }
 
-		if ($success && $this->getEnabled($mainContextId)) {
+        if ($success && $this->getEnabled($mainContextId)) {
             import('plugins.generic.coarNotifyReviewOffer.classes.ReviewOfferPreference');
             import('plugins.generic.coarNotifyReviewOffer.classes.ReviewOfferPreferenceDAO');
-            $reviewOfferPreference = new ReviewOfferPreference();
 
             $reviewOfferPreferenceDao = new ReviewOfferPreferenceDAO();
             DAORegistry::registerDAO('ReviewOfferPreferenceDAO', $reviewOfferPreferenceDao);
 
-            $reviewOfferPreference->setSubmissionId('1234567');
-            $reviewOfferPreference->setServiceUrl('https://test.com');
-            $reviewOfferPreference->setIsSent(false);
-
-//            $reviewOfferPreferenceDao->insertObject($reviewOfferPreference);
-
             HookRegistry::register('Template::Workflow::Publication', array($this, 'addToWorkflow'));
+            HookRegistry::register('TemplateManager::display',array($this, 'addGridhandlerJs'));
             HookRegistry::register('Templates::Submission::SubmissionMetadataForm::AdditionalMetadata', array($this, 'submissionWizard'));
-//            HookRegistry::register('Publication::edit', array($this, 'publicationSave'));
 
-            HookRegistry::register('LoadHandler', array($this, 'handleRequests'));
+            HookRegistry::register('LoadComponentHandler', array($this, 'setupGridHandler'));
+            HookRegistry::register('Publication::publish', array($this, 'sendNotificationsOnPublish'), HOOK_SEQUENCE_CORE);
         }
 
-		return $success;
-	}
+        return $success;
+    }
 
-  /**
-   * Provide a name for this plugin
-   *
-   * The name will appear in the plugins list where editors can
-   * enable and disable plugins.
-   */
-	public function getDisplayName() {
-		return 'Coar Notify Review Offers';
-	}
+    /**
+     * Provide a name for this plugin
+     *
+     * The name will appear in the plugins list where editors can
+     * enable and disable plugins.
+     */
+    public function getDisplayName() {
+        return 'Coar Notify Review Offers';
+    }
 
-	/**
-   * Provide a description for this plugin
-   *
-   * The description will appear in the plugins list where editors can
-   * enable and disable plugins.
-   */
-	public function getDescription() {
-		return 'This plugin notifies target review services when a submission has been successful and is ready for pre-reviews.';
-	}
+    /**
+     * Provide a description for this plugin
+     *
+     * The description will appear in the plugins list where editors can
+     * enable and disable plugins.
+     */
+    public function getDescription() {
+        return 'This plugin notifies target review services when a submission has been successful and is ready for pre-reviews.';
+    }
 
-    function notification($type, $message)
-    {
-        import('classes.notification.NotificationManager');
-        $notificationMgr = new NotificationManager();
-        $notificationMgr->createTrivialNotification(
-            Application::get()->getRequest()->getUser()->getId(),
-            $type,
-            ['contents' => __($message)]
-        );
+    private function getAuthorId($user): string {
+        $orcid = $user->getOrcid();
+        return ($orcid != "") ? $orcid : "mailto:{$user->getEmail()}";
+    }
+
+    public function getDoi($submission) {
+        return $submission->getData('publications')[0]->getData('pub-id::doi');
+    }
+
+    private function getSubmissionType(): string {
+        $applicationName = substr(Application::getName(), 0, 3);
+
+        if($applicationName == 'ops') {
+            return 'preprint';
+        }
+
+        return 'article';
     }
 
     /**
      * Retrieves the list of review services from the plugin settings and caches it
      * @return array List of review services, where key is the home URL and value is the inbox URL
      */
-    private function getReviewServiceList(): array
-    {
+    function getReviewServiceList(): array {
         if (
             $this->_reviewServiceList === null
             && !is_array($this->_reviewServiceList = $this->getSetting($this->getCurrentContextId(), 'reviewServiceList'))
@@ -96,23 +97,9 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
     }
 
     public function sendHttpPostRequest($url, $data) {
-        $this->notification(
-            NOTIFICATION_TYPE_SUCCESS,
-            'Start of POST',
-        );
-
-        // Initialize cURL session
         $ch = curl_init();
-
-        // Convert the array into JSON string
         $jsonData = json_encode($data);
 
-        $this->notification(
-            NOTIFICATION_TYPE_SUCCESS,
-            'JSON data: '.$jsonData,
-        );
-
-        // Set cURL options
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -123,21 +110,13 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
             'Content-Type: application/json',
         ));
 
-        // Execute cURL session and get the response
         $response = curl_exec($ch);
         $result = json_decode($response);
 
-        // Check for cURL errors
         if (curl_errno($ch)) {
             throw new Exception('cURL error: ' . curl_error($ch));
         }
 
-        $this->notification(
-            NOTIFICATION_TYPE_SUCCESS,
-            'End of POST',
-        );
-
-        // Close cURL session
         curl_close($ch);
 
         return $result;
@@ -189,18 +168,7 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
     }
 
     public function getInstallMigration() {
-//        $this->notification(
-//            NOTIFICATION_TYPE_SUCCESS,
-//            'In install migration',
-//        );
-
-//        $this->import('CoarNotifyReviewOfferSchemaMigration');
-//        return new CoarNotifyReviewOfferSchemaMigration();
-        $migration = new CoarNotifyReviewOfferSchemaMigration();
-
-//        $migration->up();
-
-        return $migration;
+        return new CoarNotifyReviewOfferSchemaMigration();
     }
 
     /**
@@ -212,6 +180,16 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
 
     private function isSubmissionPublished($submission): bool {
         return $submission->getData('status') === STATUS_PUBLISHED;
+    }
+
+    function getReviewOfferPreferences($submissionId) {
+        /* @var $reviewOfferPreferenceDao ReviewOfferPreferenceDAO */
+        $reviewOfferPreferenceDao = DAORegistry::getDAO('ReviewOfferPreferenceDAO');
+        $reviewOfferPreferencesResult = $reviewOfferPreferenceDao->getBySubmissionId($submissionId)->toArray();
+
+        return array_map(function($preference){
+            return $preference->getData('serviceUrl');
+        }, $reviewOfferPreferencesResult);
     }
 
     public function addToWorkflow($hookName, $params) {
@@ -236,6 +214,12 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
             'authorId' => $this->getAuthorId($user),
             'isPublished' => $this->isSubmissionPublished($submission),
             'doi' => $this->getDoi($submission),
+            'reviewOfferPreferences' => $this->getReviewOfferPreferences($submission->getData('id')),
+        ]);
+
+        $submission = $smarty->get_template_vars('submission');
+        $smarty->assign([
+            'submissionId' => $submission->getId(),
         ]);
 
         $output .= sprintf(
@@ -251,33 +235,15 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
      * @param array $args
      * @return void
      */
-    public function submissionWizard(string $hookname, array $args): void
-    {
+    public function submissionWizard(string $hookname, array $args): void {
         $templateMgr = &$args[1];
-
         $request = $this->getRequest();
-        $context = $request->getContext();
-        $dispatcher = $request->getDispatcher();
-        $apiBaseUrl = $dispatcher->url($request, ROUTE_API, $context->getData('urlPath'), '');
-
-        $publicationDao = \DAORegistry::getDAO('PublicationDAO');
         $submissionId = $request->getUserVar('submissionId');
-        $publication = $publicationDao->getById($submissionId);
 
-//        $this->templateParameters['pluginApiUrl'] = $apiBaseUrl . OPTIMETA_CITATIONS_API_ENDPOINT;
         $this->templateParameters['submissionId'] = $submissionId;
-//        $this->templateParameters['doiBaseUrl'] = OPTIMETA_CITATIONS_DOI_URL;
-
-//        $pluginDAO = new PluginDao();
-//        $this->templateParameters['citationsParsed'] = json_encode($pluginDAO->getCitations($publication));
-
-//        $publicationWorkDb = $publication->getData(OPTIMETA_CITATIONS_PUBLICATION_WORK);
 
         if (!empty($publicationWorkDb) && $publicationWorkDb !== '[]')
             $this->templateParameters['workModel'] = $publicationWorkDb;
-
-//        if (!$this->isProduction)
-//            $this->templateParameters['wikidataURL'] = OPTIMETA_CITATIONS_WIKIDATA_URL_TEST;
 
         $this->templateParameters['statusCodePublished'] = STATUS_PUBLISHED;
 
@@ -286,91 +252,119 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
         $templateMgr->display($this->getTemplateResource("submission/form/submissionWizard.tpl"));
     }
 
-    private function getAuthorId($user): string {
-        $orcid = $user->getOrcid();
-        return ($orcid != "") ? $orcid : "mailto:{$user->getEmail()}";
-    }
-
-    public function getDoi($submission) {
-//        import('classes.submission.Submission');
-//        $submission = Services::get('submission')->get($id);
-//        $doi="doi-".str_replace("/", "-", strtolower($urldoi));
-
-        // Need to also check if PublicationSettings - setting_name vorDoi is present as well encase added manually by author
-//        $vorDoi = $submission->getData('publications')[0]->getData('vorDoi');
-//        $pubDoi = $submission->getData('publications')[0]->getData('pub-id::doi');
-//        return ($pubDoi != "") ? $pubDoi : $vorDoi;
-        return $submission->getData('publications')[0]->getData('pub-id::doi');
-    }
-
-    private function getSubmissionType(): string
-    {
-        $applicationName = substr(Application::getName(), 0, 3);
-
-        if($applicationName == 'ops') {
-            return 'preprint';
+    /**
+     * Permit requests to the grid handler
+     * @param $hookName string The name of the hook being invoked
+     * @param $args array The parameters to the invoked hook
+     */
+    function setupGridHandler($hookName, $params) {
+        $component =& $params[0];
+        if ($component == 'plugins.generic.coarNotifyReviewOffer.controllers.grid.CoarReviewOfferGridHandler') {
+            import($component);
+            CoarReviewOfferGridHandler::setPlugin($this);
+            return true;
         }
-
-        return 'article';
+        return false;
     }
 
-    public function handleRequests($hookName, $params) {
+    /**
+     * Add custom gridhandlerJS for backend
+     */
+    function addGridhandlerJs($hookName, $params) {
+        $templateMgr = $params[0];
         $request = $this->getRequest();
-        $templateMgr = TemplateManager::getManager($request);
-//        $method = $request->getServerVar('REQUEST_METHOD');
-        $method = $request->getRequestMethod();
+        $gridHandlerJs = $this->getJavaScriptURL($request, false) . DIRECTORY_SEPARATOR . 'CoarReviewOfferGridHandler.js';
+        $templateMgr->addJavaScript(
+            'CoarReviewOfferGridHandlerJs',
+            $gridHandlerJs,
+            array('contexts' => 'backend')
+        );
+        return false;
+    }
 
-        $page = $params[0];
-        $op = $params[1];
+    /**
+     * Get the JavaScript URL for this plugin.
+     */
+    function getJavaScriptURL() {
+        return Application::get()->getRequest()->getBaseUrl() . DIRECTORY_SEPARATOR . $this->getPluginPath() . DIRECTORY_SEPARATOR . 'js';
+    }
 
-        if ($op == 'fetchModalContent') {
-            $templateMgr = TemplateManager::getManager($request);
-            // fetch and assign data to the template if needed
-            $templateMgr->assign('modalContent', 'This is the content of the modal.');
-            $templateMgr->display($this->getTemplateResource('modalContent.tpl'));
-        }
+    function getReviewServiceTargetsForSubmission(string $submissionId): array {
+        return array_map(function($targetServiceHomUrl) {
+            // TODO - Filter out has been sent items
+            return [
+                "id" => $targetServiceHomUrl,
+                "inbox" => $this->getReviewServiceList()[$targetServiceHomUrl],
+                "type" => "Service"
+            ];
+        }, $this->getReviewOfferPreferences($submissionId));
+    }
 
+    /**
+     * Send COAR Notifications on publish
+     *
+     * @param $hookName string
+     * @param $args array [
+     *		@option Publication The new version of the publication
+     *		@option Publication The old version of the publication
+     *		@option Submission
+     * ]
+     */
+    function sendNotificationsOnPublish($hookName, $args) {
+        /** @var $submission Submission */
+        $submission =& $args[2];
 
-//        $this->notification(
-//            NOTIFICATION_TYPE_SUCCESS,
-//            'Request method' . $method,
-//        );
-//
-//        $this->notification(
-//            NOTIFICATION_TYPE_SUCCESS,
-//            'Requested page:' . $params[0],
-//        );
-//
-//        $this->notification(
-//            NOTIFICATION_TYPE_SUCCESS,
-//            'OP:' . $params[1],
-//        );
+        $doi = $this->getDoi($submission);
+        $originName = $this->getSetting($this->getCurrentContextId(), 'originName');
+        $originHomeUrl = $this->getSetting($this->getCurrentContextId(), 'originHomeUrl');
+        $originInboxUrl = $this->getSetting($this->getCurrentContextId(), 'originInboxUrl');
 
-//$request->getRequestedPage() === 'coarNotifyReviewOffer'
-        if ($method === 'POST') {
-            // Handle the POST request here
+        $targetServices = $this->getReviewServiceTargetsForSubmission($submission->getId());
 
-            // Get form data
-            $formData = $request->getUserVars();
-
-            $optionValues = $formData['option'] ?? null; // the 'option' is the name attribute of your form fields
-
-            $this->notification(
-                NOTIFICATION_TYPE_SUCCESS,
-                'Looking at option values = ' . $optionValues,
+        foreach ($targetServices as $target) {
+            $notification = array(
+                "id" => "urn:uuid:" . PKPString::generateUUID(),
+                "@context" => array(
+                    "https://www.w3.org/ns/activitystreams",
+                    "https://purl.org/coar/notify"
+                ),
+                "type" => array(
+                    "Offer",
+                    "coar-notify:ReviewAction"
+                ),
+                "actor" => array(
+                    "id" => $originHomeUrl,
+                    "name" => $originName,
+                    "type" => "Service",
+                ),
+                "object" => array(
+                    "id" => $doi,
+                    "ietf:cite-as" => "https://doi.org/" . $doi,
+                ),
+                "origin" => array(
+                    "id" => $originHomeUrl,
+                    "inbox" => $originInboxUrl,
+                    "type" => "Service",
+                ),
+                "target" => $target,
             );
 
-            // Prevent the default request handling
-//            return true;
+            try {
+                $this->sendHttpPostRequest($target['inbox'], $notification);
+
+                $this->notification(
+                    NOTIFICATION_TYPE_SUCCESS,
+                    'Review Offer sent',
+                );
+            } catch (Exception $e) {
+                $this->notification(
+                    NOTIFICATION_TYPE_ERROR,
+                    'Review Offer failed to send',
+                );
+            }
         }
 
         return false;
     }
 
-    public function fetchModalContent($args, $request) {
-        $templateMgr = TemplateManager::getManager($request);
-        // fetch and assign data to the template if needed
-        $templateMgr->assign('modalContent', 'This is the content of the modal.');
-        return $templateMgr->display($this->getTemplateResource('modalContent.tpl'));
-    }
 }
