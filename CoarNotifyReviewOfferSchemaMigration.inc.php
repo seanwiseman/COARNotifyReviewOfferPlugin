@@ -19,7 +19,6 @@ class CoarNotifyReviewOfferSchemaMigration extends Migration {
      */
     public function up(): void {
         Capsule::schema()->create('review_offer_preferences', function (Blueprint $table) {
-            $table->bigInteger('id');
             $table->string('service_url', 255);
             $table->bigInteger('submission_id');
             $table->boolean('is_sent');
