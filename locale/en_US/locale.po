@@ -27,8 +27,26 @@ msgstr "Add Review Service"
 msgid "plugins.generic.coarNotifyReviewOffer.manageReviewServices"
 msgstr "Manage Review Service Preferences"
 
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesToggle"
+msgstr ""
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferences"
+msgstr "Preferences"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesUpdated"
+msgstr "Review Offer Preferences Updated"
+
 msgid "plugins.generic.coarNotifyReviewOffer.reviewService"
 msgstr "Review Service"
+
+msgid "plugins.generic.coarNotifyReviewOffer.sendReviewOffer"
+msgstr "Send Review Offer upon Publication"
+
+msgid "plugins.generic.coarNotifyReviewOffer.enabledReviewOfferSendFor"
+msgstr "A Review Offer will be sent to {$serviceUrl} upon Publication"
+
+msgid "plugins.generic.coarNotifyReviewOffer.disabledReviewOfferSendFor"
+msgstr "A Review Offer will not be sent to {$serviceUrl} upon Publication"
 
 msgid "plugins.generic.coarNotifyReviewOffer.noServices"
 msgstr "No Services"
