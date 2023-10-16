@@ -33,8 +33,20 @@ msgstr "Preferences"
 msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesUpdated"
 msgstr "Review Offer Preferences Updated"
 
+msgid "plugins.generic.coarNotifyReviewOffer.services"
+msgstr "Services"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferDescription"
+msgstr "To offer your preprint for peer review to any of the services listed below simply click the associated 'Ask for Reviews' button."
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferDescriptionPartTwo"
+msgstr "A request will then be sent to the target service via the COAR Notify protocol."
+
 msgid "plugins.generic.coarNotifyReviewOffer.reviewService"
 msgstr "Review Service"
+
+msgid "plugins.generic.coarNotifyReviewOffer.askForReviews"
+msgstr "Ask for Reviews"
 
 msgid "plugins.generic.coarNotifyReviewOffer.sendReviewOffer"
 msgstr "Send Review Offer upon Publication"
@@ -83,3 +95,15 @@ msgstr "Review Service Settings"
 
 msgid "plugins.generic.coarNotifyReviewOffer.reviewServiceDescription"
 msgstr "These settings provide your users with a list of target review services."
+
+msgid "plugins.generic.coarNotifyReviewOffer.doiDescription"
+msgstr "Review offers can only be sent once a DOI has been assigned."
+
+msgid "plugins.generic.coarNotifyReviewOffer.ensureDoi"
+msgstr "Please ensure a DOI is assigned."
+
+msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartOne"
+msgstr "To automatically offer your preprint for peer review after publication to any of the services listed below simply check the associated checkbox."
+
+msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartTwo"
+msgstr "A request will then be sent to the target service via the COAR Notify protocol once your preprint has been published. You can update this choice at any point before publication."
