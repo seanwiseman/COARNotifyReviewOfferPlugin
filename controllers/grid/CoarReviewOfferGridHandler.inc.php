@@ -78,7 +78,7 @@ class CoarReviewOfferGridHandler extends GridHandler {
         parent::initialize($request, $args);
 
         $gridData = array();
-        $this->setTitle('plugins.generic.coarNotifyReviewOffer.reviewOfferPreferences');
+        $this->setTitle('plugins.generic.coarNotifyReviewOffer.preferences');
         $this->setEmptyRowText('plugins.generic.coarNotifyReviewOffer.noServices');
 
         if (!$this::$plugin) {

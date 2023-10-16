@@ -27,8 +27,11 @@ msgstr "Manage Review Service Preferences"
 msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesToggle"
 msgstr ""
 
-msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferences"
+msgid "plugins.generic.coarNotifyReviewOffer.preferences"
 msgstr "Preferences"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferences"
+msgstr "Review Offer Preferences"
 
 msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesUpdated"
 msgstr "Review Offer Preferences Updated"
