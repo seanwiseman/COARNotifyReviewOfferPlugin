@@ -8,8 +8,8 @@
     <div id="coarNotifyReviewOfferSettings">
         <div id="description">{translate key="plugins.generic.coarNotifyReviewOffer.description"}</div>
 
-        <h4>Origin {translate key="navigation.settings"}</h4>
-        <p>These settings help identify which service has sent the review offer notification.</p>
+        <h4>{translate key="plugins.generic.coarNotifyReviewOffer.originSettings"}</h4>
+        <p>{translate key="plugins.generic.coarNotifyReviewOffer.originSettingsDescription"}</p>
         {csrf}
         {include file="controllers/notification/inPlaceNotification.tpl" notificationId="coarNotifyReviewOfferSettingsFormNotification"}
 
@@ -27,8 +27,8 @@
         {fbvElement type="text" label="plugins.generic.coarNotifyReviewOffer.originInboxUrl" id="origin-inbox-url" name="originInboxUrl" value=$originInboxUrl inline=true size=$fbvStyles.size.MEDIUM}
         {/fbvFormSection}
 
-            <h4>Review Service Settings</h4>
-            <p>These settings provide your users with a list of target review services.</p>
+            <h4>{translate key="plugins.generic.coarNotifyReviewOffer.reviewServiceSettings"}</h4>
+            <p>{translate key="plugins.generic.coarNotifyReviewOffer.reviewServiceDescription"}</p>
         {foreach from=$inboxUrl key=index item=value}
             {fbvFormSection}
             {fbvElement type="text" label="plugins.generic.coarNotifyReviewOffer.homeUrl" id="home-url-`$index`" name="homeUrl[]" value=$homeUrl[$index] inline=true size=$fbvStyles.size.MEDIUM}
