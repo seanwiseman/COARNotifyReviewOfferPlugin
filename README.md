@@ -1,8 +1,5 @@
 # COAR Notify Review Offer Plugin
 
-
-⚠️ 👷‍♂ **Still under active development**️👷 ⚠️
-
 About
 -----
 This plugin enables the automatic & manual sending of preprint review offer notifications to target review services 
