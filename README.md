@@ -32,7 +32,18 @@ OPS 3.3.0
 Install
 -------
 
+To install via the OPS Admin UI:
+
+* Go to Settings -> Website -> Plugins -> Upload A New Plugin -> Then select the tar/zip file for the plugin and Save.
+
+
+To install manually without the OPS Admin UI:
+
 * Copy the release source or unpack the release package into the OPS plugins/generic/coarNotifyReviewOffer/ folder.
 * Run `php tools/upgrade.php upgrade` from the OPS folder. This creates the needed database tables.
+
+
+Enable
+-------
+
 * Go to Settings -> Website -> Plugins -> Generic Plugin -> COAR Notify Review Offer Plugin and enable the plugin.
- 
