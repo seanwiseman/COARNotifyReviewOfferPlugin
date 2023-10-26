@@ -1,30 +1,98 @@
-msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-07-29T11:05:18+00:00\n"
-"PO-Revision-Date: 2020-07-29T11:05:18+00:00\n"
-"Language: Español\n"
-
 msgid "plugins.generic.coarNotifyReviewOffer.displayName"
-msgstr "Historia de los autores"
+msgstr "Opciones de evaluación"
 
 msgid "plugins.generic.coarNotifyReviewOffer.description"
-msgstr "Este plugin agrega una pestaña en la vista de lo envío, donde se enumeran todos los envíos de los contribuyentes"
+msgstr "Este plugin añade una pestaña en la visualización de los envíos, desde la que los usuarios pueden solicitar evaluaciones a los servicios de evaluación de preprints selecionados."
 
-msgid "plugins.generic.coarNotifyReviewOffer.pages"
-msgstr "Pagina(s)"
+msgid "plugins.generic.coarNotifyReviewOffer.addService"
+msgstr "Añadir Servicio de Evaluación"
+
+msgid "plugins.generic.coarNotifyReviewOffer.manageReviewServices"
+msgstr "Gestionar las Preferencias del Servicio de Evaluación"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesToggle"
+msgstr ""
+
+msgid "plugins.generic.coarNotifyReviewOffer.preferences"
+msgstr "Preferencias"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferences"
+msgstr "Preferencias de la Opción de Evaluación"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesUpdated"
+msgstr "Preferencias de la Opción de Evaluación Actualizadas"
+
+msgid "plugins.generic.coarNotifyReviewOffer.services"
+msgstr "Servicios"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferDescription"
+msgstr "Para ofrecer su preprint para evaluación por pares a cualquiera de los servicios que se enumeran a continuación, sólo tiene que hacer clic en el botón asociado 'Solicitar Evaluaciones'."
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferDescriptionPartTwo"
+msgstr "A continuación, se enviará una solicitud al servicio de destino a través del protocolo COAR Notify."
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewService"
+msgstr "Servicio de Evaluación"
+
+msgid "plugins.generic.coarNotifyReviewOffer.askForReviews"
+msgstr "Solicitar Evaluaciones"
+
+msgid "plugins.generic.coarNotifyReviewOffer.sendReviewOffer"
+msgstr "Enviar solicitud de evaluación al publicar"
+
+msgid "plugins.generic.coarNotifyReviewOffer.enabledReviewOfferSendFor"
+msgstr "Se enviará una solicitud de evalución a {$serviceUrl} tras la publicación."
+
+msgid "plugins.generic.coarNotifyReviewOffer.disabledReviewOfferSendFor"
+msgstr "No se enviará una solicitud de evalución a {$serviceUrl} tras la publicación."
+
+msgid "plugins.generic.coarNotifyReviewOffer.noServices"
+msgstr "Sin servicios"
 
 msgid "plugins.generic.coarNotifyReviewOffer.noORCID"
-msgstr "No se informó ORCID"
+msgstr "Sin ORCID"
 
 msgid "plugins.generic.coarNotifyReviewOffer.noPublications"
-msgstr "No se encontraron envíos con este ORCID o e-mail"
+msgstr "No se ha encontrado ningún envío con este ORCID o correo electrónico"
 
 msgid "plugins.generic.coarNotifyReviewOffer.orcid"
 msgstr "ORCID"
+
+msgid "plugins.generic.coarNotifyReviewOffer.homeUrl"
+msgstr "URL de la Página Principal"
+
+msgid "plugins.generic.coarNotifyReviewOffer.inboxUrl"
+msgstr "URL de la bandeja de entrada"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originSettings"
+msgstr "Ajustes de la Origen"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originSettingsDescription"
+msgstr "Estos ajustes ayudan a identificar qué servicio ha enviado la notificación de solicitud de evaluación."
+
+msgid "plugins.generic.coarNotifyReviewOffer.originName"
+msgstr "Nombre de la origen"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originHomeUrl"
+msgstr "URL de la Página Principal de la Origen"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originInboxUrl"
+msgstr "URL de la bandeja de entrada de la Origen"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewServiceSettings"
+msgstr "Ajustes del Servicio de Evaluación"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewServiceDescription"
+msgstr "Estos ajustes proporcionan a sus usuarios una lista de servicios de evaluación de destino."
+
+msgid "plugins.generic.coarNotifyReviewOffer.doiDescription"
+msgstr "Las solicituds de evaluación sólo pueden enviarse una vez que se ha asignado un DOI."
+
+msgid "plugins.generic.coarNotifyReviewOffer.ensureDoi"
+msgstr "Asegúrese de que se asigna un DOI."
+
+msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartOne"
+msgstr "Para ofrecer automáticamente su preprint para la evaluación por pares después de publicarlo en cualquiera de los servicios enumerados a continuación, sólo tiene que marcar la casilla correspondiente."
+
+msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartTwo"
+msgstr "A continuación, se enviará una solicitud al servicio de destino a través del protocolo COAR Notify una vez que se haya publicado su preprint. Puede actualizar esta opción en cualquier momento antes de la publicación."

@@ -1,0 +1,98 @@
+msgid "plugins.generic.coarNotifyReviewOffer.displayName"
+msgstr "Opções de avaliação"
+
+msgid "plugins.generic.coarNotifyReviewOffer.description"
+msgstr "Esse plugin adiciona uma guia na exibição da submissão, na qual os usuários podem solicitar avaliações de serviços de avaliação de preprints selecionados."
+
+msgid "plugins.generic.coarNotifyReviewOffer.addService"
+msgstr "Incluir Serviço de Avaliação"
+
+msgid "plugins.generic.coarNotifyReviewOffer.manageReviewServices"
+msgstr "Gerenciar Preferências do Serviço de Avaliação"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesToggle"
+msgstr ""
+
+msgid "plugins.generic.coarNotifyReviewOffer.preferences"
+msgstr "Preferências"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferences"
+msgstr "Preferências da Opção de Avaliação"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferPreferencesUpdated"
+msgstr "Preferências da Opção de Avaliaçã Atualizadas"
+
+msgid "plugins.generic.coarNotifyReviewOffer.services"
+msgstr "Serviços"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferDescription"
+msgstr "Para oferecer o seu preprint para avaliação por pares a qualquer um dos serviços listados abaixo, basta clicar no botão associado 'Solicitar avaliações'."
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewOfferDescriptionPartTwo"
+msgstr "Em seguida, uma solicitação será enviada ao serviço de destino por meio do protocolo COAR Notify."
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewService"
+msgstr "Serviço de Avaliação"
+
+msgid "plugins.generic.coarNotifyReviewOffer.askForReviews"
+msgstr "Solicitar Avaliações"
+
+msgid "plugins.generic.coarNotifyReviewOffer.sendReviewOffer"
+msgstr "Enviar pedido de avaliação após a postagem"
+
+msgid "plugins.generic.coarNotifyReviewOffer.enabledReviewOfferSendFor"
+msgstr "Um pedido de avaliação será enviado para {$serviceUrl} após a postagem"
+
+msgid "plugins.generic.coarNotifyReviewOffer.disabledReviewOfferSendFor"
+msgstr "Um pedido de avaliação não será enviado para {$serviceUrl} após a postage"
+
+msgid "plugins.generic.coarNotifyReviewOffer.noServices"
+msgstr "Sem serviços"
+
+msgid "plugins.generic.coarNotifyReviewOffer.noORCID"
+msgstr "Nenhum ORCID informado"
+
+msgid "plugins.generic.coarNotifyReviewOffer.noPublications"
+msgstr "Não foram encontradas submissões com este ORCID ou e-mail"
+
+msgid "plugins.generic.coarNotifyReviewOffer.orcid"
+msgstr "ORCID"
+
+msgid "plugins.generic.coarNotifyReviewOffer.homeUrl"
+msgstr "URL da página principal"
+
+msgid "plugins.generic.coarNotifyReviewOffer.inboxUrl"
+msgstr "URL da Caixa de Entrada"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originSettings"
+msgstr "Configurações de Origem"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originSettingsDescription"
+msgstr "Essas configurações ajudam a identificar qual serviço enviou a(s) notificação(ões) de pedido de avaliação."
+
+msgid "plugins.generic.coarNotifyReviewOffer.originName"
+msgstr "Nome da Origem"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originHomeUrl"
+msgstr "URL da Página Principal da Origem"
+
+msgid "plugins.generic.coarNotifyReviewOffer.originInboxUrl"
+msgstr "URL da Caixa de Entrada da Origem"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewServiceSettings"
+msgstr "Configurações do Serviço de Avaliação"
+
+msgid "plugins.generic.coarNotifyReviewOffer.reviewServiceDescription"
+msgstr "Essas configurações fornecem aos seus usuários uma lista de serviços de avaliação de destino."
+
+msgid "plugins.generic.coarNotifyReviewOffer.doiDescription"
+msgstr "Pedidos de avaliação podem ser enviados apenas após a designação de um DOI."
+
+msgid "plugins.generic.coarNotifyReviewOffer.ensureDoi"
+msgstr "Por favor, certifique-se que um DOI foi designado."
+
+msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartOne"
+msgstr "Para oferecer automaticamente o seu preprint para avaliação por pares após a postagem em qualquer um dos serviços listados abaixo, basta marcar a caixa de seleção associada."
+
+msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartTwo"
+msgstr "Uma solicitação será enviada ao serviço de destino por meio do protocolo COAR Notify assim que o seu preprint for postado. Você pode atualizar essa opção a qualquer momento antes da postagem."
