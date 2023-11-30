@@ -207,7 +207,6 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
         $smarty->assign([
             'submissionType' => $this->getSubmissionType(),
             'reviewServiceList' => $this->getReviewServiceList(),
-            'submission' => json_encode($submission),
             'originHomeUrl' => $this->getSetting($this->getCurrentContextId(), 'originHomeUrl'),
             'originInboxUrl' => $this->getSetting($this->getCurrentContextId(), 'originInboxUrl'),
             'actorName' => $user->getFullName(),
@@ -215,11 +214,6 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
             'isPublished' => $this->isSubmissionPublished($submission),
             'doi' => $this->getDoi($submission),
             'reviewOfferPreferences' => $this->getReviewOfferPreferences($submission->getData('id')),
-        ]);
-
-        $submission = $smarty->get_template_vars('submission');
-        $smarty->assign([
-            'submissionId' => $submission->getId(),
         ]);
 
         $output .= sprintf(
