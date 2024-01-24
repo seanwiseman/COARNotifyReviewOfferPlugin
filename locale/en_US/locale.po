@@ -96,3 +96,9 @@ msgstr "To automatically offer your preprint for peer review after posting to an
 
 msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartTwo"
 msgstr "A request will then be sent to the target service via the COAR Notify protocol once your preprint has been posted. You can update this choice at any point before posting."
+
+msgid "plugins.generic.coarNotifyReviewOffer.notification.reviewOfferSending.success"
+msgstr "Review Offer sent"
+
+msgid "plugins.generic.coarNotifyReviewOffer.notification.reviewOfferSending.fail"
+msgstr "Review Offer failed to send"

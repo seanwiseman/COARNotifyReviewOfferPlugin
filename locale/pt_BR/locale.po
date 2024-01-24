@@ -96,3 +96,9 @@ msgstr "Para oferecer automaticamente o seu preprint para avaliação por pares 
 
 msgid "plugins.generic.coarNotifyReviewOffer.prePubDescriptionPartTwo"
 msgstr "Uma solicitação será enviada ao serviço de destino por meio do protocolo COAR Notify assim que o seu preprint for postado. Você pode atualizar essa opção a qualquer momento antes da postagem."
+
+msgid "plugins.generic.coarNotifyReviewOffer.notification.reviewOfferSending.success"
+msgstr "Opções de avaliação enviadas"
+
+msgid "plugins.generic.coarNotifyReviewOffer.notification.reviewOfferSending.fail"
+msgstr "Falha no envio das opções de avaliação"

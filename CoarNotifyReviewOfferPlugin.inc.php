@@ -63,6 +63,17 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
         return 'This plugin notifies target review services when a submission has been successful and is ready for pre-reviews.';
     }
 
+    private function notification($type, $message)
+    {
+        import('classes.notification.NotificationManager');
+        $notificationMgr = new NotificationManager();
+        $notificationMgr->createTrivialNotification(
+            Application::get()->getRequest()->getUser()->getId(),
+            $type,
+            ['contents' => __($message)]
+        );
+    }
+
     private function getAuthorId($user): string {
         $orcid = $user->getOrcid();
         return ($orcid != "") ? $orcid : "mailto:{$user->getEmail()}";
@@ -348,12 +359,12 @@ class CoarNotifyReviewOfferPlugin extends GenericPlugin {
 
                 $this->notification(
                     NOTIFICATION_TYPE_SUCCESS,
-                    'Review Offer sent',
+                    'plugins.generic.coarNotifyReviewOffer.notification.reviewOfferSending.success',
                 );
             } catch (Exception $e) {
                 $this->notification(
                     NOTIFICATION_TYPE_ERROR,
-                    'Review Offer failed to send',
+                    'plugins.generic.coarNotifyReviewOffer.notification.reviewOfferSending.fail',
                 );
             }
         }
