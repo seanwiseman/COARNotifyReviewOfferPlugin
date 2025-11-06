@@ -1,4 +1,5 @@
 function sendNotificationHandler(
+    sendNotificationUrl,
     originInboxUrl,
     originHomeUrl,
     targetInboxUrl,
@@ -43,7 +44,7 @@ function sendNotificationHandler(
         ]
     };
 
-    fetch(targetInboxUrl, {
+    fetch(sendNotificationUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
